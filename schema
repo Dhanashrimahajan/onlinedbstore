@@ -1,0 +1,14 @@
+--onlinestoredb user creation
+create user onlinestoredb identified by Test123
+DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp
+ACCOUNT UNLOCK;
+
+--onlinestoredbadmin user creation
+create user olstoredbadmin identified by Test123
+DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp
+ACCOUNT UNLOCK;
+
+--onlinestoredbaapp user creation
+create user olstoredbapp  identified by Test123
+DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp
+ACCOUNT UNLOCK;
