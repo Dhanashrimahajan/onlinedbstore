@@ -1,0 +1,14 @@
+--Onetime Backup tables
+Create Table	COUNTRIES_BKP	as select * from 	COUNTRIES	;
+Create Table	CUSTOMERS_BKP	as select * from 	CUSTOMERS	;
+Create Table	DEPARTMENT_BKP	as select * from 	DEPARTMENT	;
+Create Table	EMPLOYEES_BKP	as select * from 	EMPLOYEES	;
+Create Table	LOCATIONS_BKP	as select * from 	LOCATIONS	;
+Create Table	ORDERS_BKP	as select * from 	ORDERS	;
+Create Table	PRODUCT_CATEGORY_BKP	as select * from 	PRODUCT_CATEGORY	;
+Create Table	PRODUCTS_BKP	as select * from 	PRODUCTS	;
+Create Table	REGIONS_BKP	as select * from 	REGIONS	;
+Create Table	WAREHOUSES_BKP	as select * from 	WAREHOUSES	;
+Create Table	CONTACTS_BKP	as select * from 	CONTACTS	;
+Create Table	INVENTORIES_BKP	as select * from 	INVENTORIES	;
+Create Table	ORDER_ITEMS_BKP	as select * from 	ORDER_ITEMS	;
