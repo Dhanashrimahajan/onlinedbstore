@@ -1,0 +1,125 @@
+--Report for Most sold product in different contries in last 7 days
+
+CREATE OR REPLACE VIEW oldb_most_sold_prod_in_cont_vw AS
+    SELECT
+        productname  most_sold_product,
+        countryname,
+        quantity     ordered_product_qantity,
+        orderdate
+    FROM
+        (
+            SELECT
+                RANK()
+                OVER(PARTITION BY countryname
+                     ORDER BY quantity DESC
+                ) rn,
+                countryname,
+                productname,
+                quantity,
+                orderdate
+            FROM
+                (
+                    SELECT
+                        SUM(orditm.quantity) quantity,
+                        cont.countryname,
+                        invt.productid,
+                        prod.productname,
+                        ordr.orderdate
+                    FROM
+                        order_items  orditm,
+                        orders       ordr,
+                        inventories  invt,
+                        warehouses   wh,
+                        locations    lcn,
+                        countries    cont,
+                        products     prod
+                    WHERE
+                            ordr.orderid = orditm.orderid
+                        AND ordr.status = 'completed'
+                        AND ordr.orderdate > ( sysdate - 7 )
+                        AND orditm.productid = invt.productid
+                        AND orditm.inventoryid = invt.inventoryid
+                        AND wh.warehouseid = invt.warehouseid
+                        AND lcn.locationid = wh.locationid
+                        AND cont.countryid = lcn.countryid
+                        AND prod.productid = invt.productid
+                    GROUP BY
+                        cont.countryname,
+                        invt.productid,
+                        prod.productname,
+                        ordr.orderdate
+                )
+        )
+    WHERE
+        rn = 1;
+
+--report for customer who placed maximum orders in different countries in last 7days 
+CREATE OR REPLACE VIEW cust_placed_max_orders_vw AS
+    SELECT
+        name         customer_name,
+        countryname  customer_country,
+        address      customer_address,
+        website      customer_website,
+        facebook     customer_facebookid,
+        twitter      customer_tiwtter_link,
+        whatsapp     customer_whatsapp_number,
+        cnt          order_count
+    FROM
+        (
+            SELECT
+                RANK()
+                OVER(PARTITION BY countryname
+                     ORDER BY cnt DESC
+                ) rn,
+                countryname,
+                customerid,
+                name,
+                address,
+                website,
+                facebook,
+                twitter,
+                whatsapp,
+                cnt
+            FROM
+                (
+                    SELECT
+                        COUNT(ordr.orderid) cnt,
+                        cont.countryname,
+                        ordr.customerid,
+                        cust.name,
+                        cust.address,
+                        cust.website,
+                        cust.facebook,
+                        cust.twitter,
+                        cust.whatsapp
+                    FROM
+                        order_items  orditm,
+                        orders       ordr,
+                        inventories  invt,
+                        warehouses   wh,
+                        locations    lcn,
+                        countries    cont,
+                        customers    cust
+                    WHERE
+                            ordr.orderid = orditm.orderid
+                        AND ordr.status = 'completed'
+                        AND ordr.orderdate > ( sysdate - 7 )
+                        AND orditm.productid = invt.productid
+                        AND orditm.inventoryid = invt.inventoryid
+                        AND wh.warehouseid = invt.warehouseid
+                        AND lcn.locationid = wh.locationid
+                        AND cont.countryid = lcn.countryid
+                        AND ordr.customerid = cust.customerid
+                    GROUP BY
+                        cont.countryname,
+                        ordr.customerid,
+                        cust.name,
+                        cust.address,
+                        cust.website,
+                        cust.facebook,
+                        cust.twitter,
+                        cust.whatsapp
+                )
+        )
+    WHERE
+        rn = 1;
