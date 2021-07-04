@@ -1,0 +1,3 @@
+--Export for all tables
+
+  expdp onlinestoredb/Test123@orcl tables=CONTACTS,COUNTRIES,CUSTOMERS,DEPARTMENT,EMPLOYEES,INVENTORIES,LOCATIONS,ORDERS,ORDER_ITEMS,PRODUCTS,PRODUCT_CATEGORY,REGIONS,WAREHOUSES directory=TEST_DIR dumpfile=All_tab.dmp logfile=expdpall_tab.log;
