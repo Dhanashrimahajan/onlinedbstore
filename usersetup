@@ -1,0 +1,68 @@
+--user setup onlinestoredb
+grant create session to onlinestoredb;
+grant query rewrite to onlinestoredb;
+grant create table to onlinestoredb;
+grant create type to onlinestoredb;
+grant create view to onlinestoredb;
+grant select any DICTIONARY to onlinestoredb;
+grant create procedure to onlinestoredb;
+grant create procedure to onlinestoredb;
+grant unlimited tablespace to onlinestoredb;
+grant create MATERIALIZED view to onlinestoredb;
+grant create SEQUENCE to onlinestoredb;
+grant create TRIGGER to onlinestoredb;
+grant create SYNONYM to onlinestoredb;
+
+--user setup olstoredbadmin
+grant resource,connect,dba to olstoredbadmin;
+
+--user setup olstoredbapp
+grant create session to olstoredbapp;
+grant query rewrite to olstoredbapp;
+grant create table to olstoredbapp;
+grant create type to olstoredbapp;
+grant create view to olstoredbapp;
+grant select any DICTIONARY to olstoredbapp;
+grant create procedure to olstoredbapp;
+grant create procedure to olstoredbapp;
+grant unlimited tablespace to olstoredbapp;
+grant create MATERIALIZED view to olstoredbapp;
+grant create SEQUENCE to olstoredbapp;
+grant create TRIGGER to olstoredbapp;
+grant create SYNONYM to olstoredbapp;
+
+---------------------
+grant select,insert,update,delete on onlinestoredb.orders to olstoredbapp;
+grant select,insert,update,delete on onlinestoredb.COUNTRIES to olstoredbapp;
+grant select,insert,update,delete on onlinestoredb.CUSTOMERS to olstoredbapp;
+grant select,insert,update,delete on onlinestoredb.DEPARTMENT to olstoredbapp;
+grant select,insert,update,delete on onlinestoredb.EMPLOYEES to olstoredbapp;
+grant select,insert,update,delete on onlinestoredb.LOCATIONS to olstoredbapp;
+grant select,insert,update,delete on onlinestoredb.ORDERS to olstoredbapp;
+grant select,insert,update,delete on onlinestoredb.PRODUCT_CATEGORY to olstoredbapp;
+grant select,insert,update,delete on onlinestoredb.PRODUCTS to olstoredbapp;
+grant select,insert,update,delete on onlinestoredb.REGIONS to olstoredbapp;
+grant select,insert,update,delete on onlinestoredb.WAREHOUSES to olstoredbapp;
+grant select,insert,update,delete on onlinestoredb.CONTACTS to olstoredbapp;
+grant select,insert,update,delete on onlinestoredb.INVENTORIES to olstoredbapp;
+grant select,insert,update,delete on onlinestoredb.ORDER_ITEMS to olstoredbapp;
+grant select on onlinestoredb.	COUNTRIES_BKP	to olstoredbapp;
+grant select on onlinestoredb.	CUSTOMERS_BKP	to olstoredbapp;
+grant select on onlinestoredb.	DEPARTMENT_BKP	to olstoredbapp;
+grant select on onlinestoredb.	EMPLOYEES_BKP	to olstoredbapp;
+grant select on onlinestoredb.	LOCATIONS_BKP	to olstoredbapp;
+grant select on onlinestoredb.	ORDERS_BKP	to olstoredbapp;
+grant select on onlinestoredb.	PRODUCT_CATEGORY_BKP	to olstoredbapp;
+grant select on onlinestoredb.	PRODUCTS_BKP	to olstoredbapp;
+grant select on onlinestoredb.	REGIONS_BKP	to olstoredbapp;
+grant select on onlinestoredb.	WAREHOUSES_BKP	to olstoredbapp;
+grant select on onlinestoredb.	CONTACTS_BKP	to olstoredbapp;
+grant select on onlinestoredb.	INVENTORIES_BKP	to olstoredbapp;
+grant select on onlinestoredb.	ORDER_ITEMS_BKP	to olstoredbapp;
+grant select on onlinestoredb.	ORDERS_AUDIT	to olstoredbapp;
+GRANT SELECT ON oldb_most_sold_prod_in_cont_vw to olstoredbapp; 
+GRANT SELECT ON cust_placed_max_orders_vw to olstoredbapp;
+grant execute on OLDB_UPDATE_ORDER_STATUS_PRC to olstoredbapp;
+grant execute on OLDB_INSERT_ORDER_PRC to olstoredbapp;
+grant execute on OLDB_GET_ORDER_DETAILS_PRC to olstoredbapp
+------------------- 
